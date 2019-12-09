@@ -23,8 +23,8 @@
         <span>{{ quote.date }}</span>
         <span>{{ quote.like }}</span>
         <span>{{ quote.statu }}</span>
-        <button class="btn-green btn-xsmall">edit</button>
-        <button class="btn-red btn-xsmall">delete</button>
+        <button @click="editQuote(quote._id)" class="btn-green btn-xsmall edit">edit</button>
+        <button @click="deleteQuote(quote._id)" class="btn-red btn-xsmall delete">delete</button>
       </div>
     </div>
   </div>
@@ -39,6 +39,27 @@ export default {
       required: true,
       type: Array
     }
+  },
+  methods: {
+    editQuote(id) {
+      this.$store.dispatch("quotes/editeQuote", id);
+    },
+    deleteQuote(id) {
+      this.$store.dispatch("quotes/deleteQuote", id);
+    }
   }
 };
 </script>
+<style lang="scss">
+#userQuotesItems {
+  .edit {
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: 1.3rem;
+  }
+  .delete {
+    font-size: 1.3rem;
+  }
+}
+</style>
+

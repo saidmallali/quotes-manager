@@ -6,7 +6,8 @@
       </div>
 
       <hr />
-
+      <QuoteEditor />
+      <hr />
       <div class="activity-list">
         <UserQuotesItems :userQuotes="userQuotes" />
       </div>
@@ -15,11 +16,13 @@
 </template>
 <script>
 import UserQuotesItems from "./UserQuotesItems";
+import QuoteEditor from "@/components/quotes/QuoteEditor";
 
 export default {
   name: "UserQuotes",
   components: {
-    UserQuotesItems
+    UserQuotesItems,
+    QuoteEditor
   },
   props: {
     user: {

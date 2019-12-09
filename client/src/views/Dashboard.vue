@@ -26,7 +26,7 @@ export default {
       return this.$store.getters["auth/getUser"];
     },
     userQuotes() {
-      return this.$store.getters["user/getUserQuotes"];
+      return this.$store.getters["quotes/getUserQuotes"];
     }
   },
 
@@ -34,12 +34,11 @@ export default {
     this.$store
       .dispatch("auth/fetchUser")
       .then(() => {
-        console.log("fetchUser done");
         this.$emit("ready");
       })
       .catch(err => console.error(err.message));
 
-    this.$store.dispatch("user/fetchUserQuotes");
+    this.$store.dispatch("quotes/fetchUserQuotes");
   }
 };
 </script>

@@ -213,7 +213,7 @@ form {
   border-color: #c82543;
 }
 
-.form-input:invalid ~ .form-error {
+.form-input:invalid~.form-error {
   display: block;
 }
 
@@ -235,7 +235,7 @@ textarea.form-input {
   border-color: #c82543;
 }
 
-.input-error ~ .form-error {
+.input-error~.form-error {
   display: block;
 }
 
@@ -262,14 +262,14 @@ textarea.form-input {
 }
 
 .form-label,
-.form-group > label {
+.form-group>label {
   margin-bottom: 5px;
   display: inline-block;
   color: #767676;
 }
 
 .form-label-password,
-.form-group > label-password {
+.form-group>label-password {
   margin-bottom: 0px;
 }
 
@@ -339,6 +339,7 @@ button {
 }
 
 @media (min-width: 240px) and (max-width: 720px) {
+
   .btn,
   .btn-blue,
   .btn-blue-outlined,
@@ -391,7 +392,7 @@ button {
 }
 
 .btn-small {
-  padding: 10px 20px;
+  padding: 5px 10px;
 }
 
 .btn-large {
@@ -638,6 +639,7 @@ button {
     width: 21px;
   }
 }
+
 /***************************
 ******* profile card and list user item
 *******************************/
@@ -1027,6 +1029,7 @@ button {
 span.privat {
   color: red;
 }
+
 span.public {
   color: green;
 }
