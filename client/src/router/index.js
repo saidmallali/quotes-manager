@@ -43,7 +43,7 @@ const routes = [
       if(auth.state.token) {
         next()
       }else {
-        next('/login')
+        next({name: 'login'})
       }
     }
     // beforeEnter: (to, from, next) => {

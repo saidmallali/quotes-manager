@@ -10,6 +10,15 @@ const QuoteSchema = new mongoose.Schema({
         type: String,
         required: [true, 'please enter a Quote']
       },
+    username:{
+        type:String,
+    },
+    name:{
+        type:String
+    },
+    avatar:{
+        type:String
+    },
     like: {
         type: Number,
         default:0,

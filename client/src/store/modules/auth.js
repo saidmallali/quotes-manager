@@ -81,11 +81,15 @@ export default {
         },
         
         logout({commit}) {
+          localStorage.removeItem('token')
+          localStorage.removeItem('expiresDate')
           commit('clearToken')
           },
 
         setLogoutTimer ({commit}, expirationTime){
             setTimeout(() => {
+              localStorage.removeItem('token')
+              localStorage.removeItem('expiresDate')
                 commit('clearToken')
             }, expirationTime * 1000);
         }

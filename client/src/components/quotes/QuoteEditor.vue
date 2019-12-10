@@ -2,21 +2,21 @@
   <div id="formQuote">
     <form @submit.prevent="save">
       <div class="form-group">
-        <textarea name id cols="30" rows="5" class="form-input" v-model="text"></textarea>
+        <textarea name id cols="30" rows="5" class="form-input" v-model="editeQuote.quote"></textarea>
       </div>
       <div class="form-group">
         <input
           type="radio"
           name="statu"
           value="private"
-          v-model="statu"
+          v-model="editeQuoteStatu.statu"
           :checked="editeQuote.statu === 'private'"
         /> private
         <input
           type="radio"
           name="statu"
           value="public"
-          v-model="statu"
+          v-model="editeQuoteStatu.statu"
           :checked="editeQuote.statu === 'public'"
         /> public
       </div>
@@ -38,22 +38,30 @@ export default {
 
   computed: {
     isUpdate() {
-      // return this.$store.quotes.state.isUpdate;
       return this.$store.getters["quotes/getIsUpdate"];
     },
 
-    editeQuote() {
-      // return this.$store.quotes.state.EditQuote;
-      return this.$store.getters["quotes/getEditQuote"];
+    editeQuote: {
+      get() {
+        return this.$store.getters["quotes/getEditQuote"];
+      },
+      set(value) {
+        this.$store.dispatch("quotes/setEditeQuote", value);
+      }
+    },
+    editeQuoteStatu: {
+      get() {
+        return this.$store.getters["quotes/getEditQuote"];
+      },
+      set(value) {
+        this.$store.dispatch("quotes/setEditeQuoteStatu", value);
+      }
     }
   },
 
   methods: {
     save() {
-      const quote = {
-        quote: this.text,
-        statu: this.statu
-      };
+      const quote = this.editeQuote;
       if (this.isUpdate) {
         this.$store
           .dispatch("quotes/updateQuote", quote)

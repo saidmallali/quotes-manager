@@ -4,7 +4,7 @@ const checkAuth = require('../middleware/checkAuth')
 const config = require('config')
 const {check, validationResult} = require('express-validator')
 
-// const User = require('../models/UsersModel');
+const User = require('../models/UsersModel');
 const Quote = require('../models/QuoteModel')
 // const LikeDislike = require('../models/LikeDislikeModel')
 
@@ -42,14 +42,17 @@ router.post('/',
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-
+    const user =  await User.find(req.user.id)
     const { quote, statu} = req.body;
-
+    
     try {
       const newQuote = new Quote({
         quote,
         statu,
-        user: req.user.id
+        username:user.username,
+        name:user.name,
+        user: req.user.id,
+        avatar:user.avatar
       });
 
       const Quotes = await newQuote.save();
