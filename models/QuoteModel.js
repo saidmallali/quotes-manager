@@ -39,4 +39,15 @@ const QuoteSchema = new mongoose.Schema({
 
 });
 
+QuoteSchema.index({
+    quote: 'text',
+    // description: 'text',
+  });
+  // {
+    //     weights: {
+    //       name: 5,
+    //       description: 1,
+    //     },
+    //   }
+
 module.exports = mongoose.model('Quotes', QuoteSchema);

@@ -2,8 +2,8 @@
   <div class="home">
     <AppSpinner v-if="!publicQuotes" />
     <h2 v-if="publicQuotes">Popular Quotes</h2>
-    <div class="col-7">
-      <SearchQuote />
+    <div class="col col-3">
+      <SearchQuote :user="false" />
     </div>
 
     <div v-if="publicQuotes.length === 0">Sorry, no Quotes matched</div>
@@ -18,10 +18,9 @@
               <p>{{ quote.quote }} ”</p>
             </blockquote>
             <cite>
-              <span>{{quote.name}}</span>
-              <br />user name:
+              <span>{{ quote.name }}</span>
               <br />
-              {{quote.username}}
+              published by: {{ quote.username }}
             </cite>
           </div>
         </div>
@@ -62,6 +61,9 @@ export default {
 };
 </script>
 <style lang="scss">
+.home {
+  width: 100%;
+}
 .testimonial-quote {
   font-size: 16px;
 }
@@ -111,6 +113,7 @@ export default {
   border-radius: 50%;
   display: block;
   width: 60px;
+  min-height: 60px;
   position: absolute;
   top: -0.2em;
   left: 0;

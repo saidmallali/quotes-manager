@@ -43,10 +43,13 @@ router.post('/',
       return res.status(400).json({ errors: errors.array() });
     }
     const { quote, statu} = req.body;
-    const userQ =  await User.find({user: req.user.id})
+   
   
 
     try {
+
+      const userQ =  await User.findById(req.user.id);
+      console.log(userQ)
       const newQuote = new Quote({
         quote,
         statu,

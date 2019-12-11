@@ -27,7 +27,7 @@ router.post('/', [
        return res.status(400).json({errors: errors.array()})
     }
 
-    const {name, email, password, username} = req.body;
+    const {name, email, password, username, avatar} = req.body;
     try {
 
         let user = await User.findOne({email});
@@ -44,7 +44,8 @@ router.post('/', [
             name,
             email,
             password,
-            username
+            username,
+            avatar
         })
 
         const salt = await bcrybt.genSalt(10);

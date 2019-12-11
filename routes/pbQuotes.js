@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const checkAuth = require('../middleware/checkAuth')
+// const checkAuth = require('../middleware/checkAuth')
+const APIFeatures = require('../utils/apiFeatures');
 
 const Quote = require('../models/QuoteModel')
 
@@ -11,7 +12,13 @@ const Quote = require('../models/QuoteModel')
 
 router.get('/',async (req, res) => {
     try {
-        const quotes = await Quote.find({ statu: "public" }).sort({date: -1});
+        // const quotes = await Quote.find({ statu: "public"}).sort({date: -1});
+        const features = new APIFeatures(Quote.find(), req.query)
+        .sort()
+        .search()
+        .paginate();
+      const quotes = await features.query;
+
         res.json(quotes);
       } catch (err) {
         console.error(err.message);

@@ -140,6 +140,21 @@ export default {
             axios.put(`/api/quotes/${quote._id}`,quote,config)
             .then(res => commit('updateUserQuotesAfterUpdate', {quote:res.data}))
             .catch(err => console.error(err.message))
+        },
+
+        searchQuote({commit},quote){
+            console.log('from state',quote)
+            axios
+            .get(`/api/pbquotes?search=${quote}`)
+            .then(res => {
+                console.log(res.data)
+                commit('publicQuotes', res.data)
+            })
+            .catch(err => console.log(err));
+        },
+
+        searchQuoteUser(context,quote){
+            console.log(quote)
         }
 
         
