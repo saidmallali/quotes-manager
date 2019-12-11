@@ -1,6 +1,14 @@
 <template>
   <div class="home">
     <AppSpinner v-if="!publicQuotes" />
+    <h2 v-if="publicQuotes">Popular Quotes</h2>
+    <div class="col-7">
+      <SearchQuote />
+    </div>
+
+    <div v-if="publicQuotes.length === 0">Sorry, no Quotes matched</div>
+    <!-- <div>Sorry, no results matched your search.</div> -->
+
     <div v-if="publicQuotes" class="activity-list push-top">
       <div v-for="quote in publicQuotes" :key="quote._id" class="activity">
         <div class="testimonial-quote group">
@@ -26,10 +34,12 @@
 // @ is an alias to /src
 // import axios from "axios";
 import AppSpinner from "@/components/layout/AppSpinner";
+import SearchQuote from "@/components/quotes/SearchQuote";
 export default {
   name: "home",
   components: {
-    AppSpinner
+    AppSpinner,
+    SearchQuote
   },
   data() {
     return {
@@ -65,7 +75,7 @@ export default {
   background: none;
   color: gray;
   font-family: Georgia, serif;
-  font-size: 1.5em;
+  font-size: 1.8rem;
   font-style: italic;
   line-height: 1.4 !important;
   margin: 0;
@@ -86,7 +96,7 @@ export default {
 .testimonial-quote blockquote p:first-child:before {
   content: "\201C";
   color: #81bedb;
-  font-size: 7.5em;
+  font-size: 6.5em;
   font-weight: 700;
   opacity: 0.3;
   position: absolute;

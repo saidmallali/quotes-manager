@@ -42,17 +42,18 @@ router.post('/',
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: errors.array() });
     }
-    const user =  await User.find(req.user.id)
     const { quote, statu} = req.body;
-    
+    const userQ =  await User.find({user: req.user.id})
+  
+
     try {
       const newQuote = new Quote({
         quote,
         statu,
-        username:user.username,
-        name:user.name,
+        username: userQ.username,
+        name: userQ.name,
         user: req.user.id,
-        avatar:user.avatar
+        avatar: userQ.avatar
       });
 
       const Quotes = await newQuote.save();

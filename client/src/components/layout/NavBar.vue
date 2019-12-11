@@ -1,49 +1,41 @@
 <template>
   <div id="navbar">
-    <header>
-      <nav class="nav">
-        <div class="brand">
-          <router-link :to="{ name: 'Home' }">Qoutes manager</router-link>
+    <nav class="nav">
+      <div class="brand">
+        <router-link :to="{ name: 'home' }">
+          <img class="logo" src="../../assets/quotation.png" />
+        </router-link>
+      </div>
+      <div class="nav-descktop">
+        <div class="nav-part_left">
+          <ul class="list-items-left">
+            <li>
+              <router-link :to="{ name: 'home' }">HOME</router-link>
+            </li>
+            <li>
+              <router-link :to="{ name: 'about' }">ABOUT</router-link>
+            </li>
+            <li>
+              <router-link v-show="auth" :to="{ name: 'dashboard' }">DASHBOARD</router-link>
+            </li>
+          </ul>
         </div>
-        <div class="nav-descktop">
-          <div class="nav-part_left">
-            <ul class="list-items-left">
-              <li>
-                <router-link :to="{ name: 'home' }">Home</router-link>
-              </li>
-              <li>
-                <router-link :to="{ name: 'about' }">ABOUT</router-link>
-              </li>
-              <li>
-                <router-link v-show="auth" :to="{ name: 'dashboard' }"
-                  >Dashboard</router-link
-                >
-              </li>
-            </ul>
-          </div>
-          <div class="separatour"></div>
-          <div class="nav-part_right">
-            <ul class="list-items-right">
-              <li>
-                <router-link v-show="auth" :to="{ name: 'logout' }"
-                  >LOGOUT</router-link
-                >
-              </li>
-              <li>
-                <router-link v-show="!auth" :to="{ name: 'login' }"
-                  >LOGIN</router-link
-                >
-              </li>
-              <li>
-                <router-link v-show="!auth" :to="{ name: 'register' }"
-                  >REGISTER</router-link
-                >
-              </li>
-            </ul>
-          </div>
+        <!-- <div class="separatour"></div> -->
+        <div class="nav-part_right">
+          <ul class="list-items-right">
+            <li>
+              <router-link v-show="auth" :to="{ name: 'logout' }">LOGOUT</router-link>
+            </li>
+            <li>
+              <router-link v-show="!auth" :to="{ name: 'login' }">LOGIN</router-link>
+            </li>
+            <li>
+              <router-link v-show="!auth" :to="{ name: 'register' }">REGISTER</router-link>
+            </li>
+          </ul>
         </div>
-      </nav>
-    </header>
+      </div>
+    </nav>
   </div>
 </template>
 
@@ -77,7 +69,6 @@ export default {
   -webkit-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.33);
   -moz-box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.33);
   box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.33);
-
   .nav {
     width: 95%;
     height: 100%;
@@ -89,8 +80,14 @@ export default {
     justify-content: center;
 
     .brand {
-      min-width: 100px;
+      width: 100px;
       font-size: 2rem;
+      display: flex;
+      align-items: center;
+
+      .logo {
+        width: 50%;
+      }
     }
 
     .nav-descktop {
@@ -134,12 +131,18 @@ export default {
       }
 
       .nav-part_right {
-        width: 20%;
+        min-width: 30%;
+
+        height: 100%;
+        position: relative;
         .list-items-right {
           position: absolute;
           top: 50%;
           transform: translateY(-50%);
           width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
 
           li {
             display: inline-block;
@@ -161,9 +164,9 @@ export default {
           }
         }
       }
-      .separatour {
+      /* .separatour {
         flex: 1;
-      }
+      } */
     }
   }
 }

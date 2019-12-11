@@ -69,6 +69,7 @@ export default {
              },
 
         createQuote({commit}, quote){
+            console.log('create quote')
             if(!auth.state.token) return
             const config = {
                 headers:{
@@ -76,12 +77,12 @@ export default {
                 },
                 useCredentails: true
               };
-            axios
-            .post('/api/quotes',quote, config)
+            axios.post('/api/quotes',quote, config)
             .then(res => {
+                console.log(res.data)
                 commit('updateUserQuote', res.data)
                 commit('clearIsUpdate')})
-            .catch(err => console.error(err.message))
+            .catch(err => console.error(err))
         },
 
         fetchUserQuotes({commit}) {
