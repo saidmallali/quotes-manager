@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <div class="col-4 push-top">
+  <div class="col-4 push-top">
+    <div>
       <div class="profile-card">
         <p class="text-center">
           <img :src="user.avatar ? user.avatar : defaultAvatar" alt class="avatar-xlarge" />

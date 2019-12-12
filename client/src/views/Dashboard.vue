@@ -37,8 +37,15 @@ export default {
         this.$emit("ready");
       })
       .catch(err => console.error(err.message));
-
-    this.$store.dispatch("quotes/fetchUserQuotes");
+    this.$store.dispatch("quotes/fetchUserQuotes", {
+      page: 1,
+      limit: 5
+    });
   }
 };
 </script>
+<style lang="scss">
+#dashboard {
+  width: 100%;
+}
+</style>

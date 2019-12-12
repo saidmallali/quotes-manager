@@ -1,11 +1,11 @@
 <template>
   <div class="home">
-    <AppSpinner v-if="!publicQuotes" />
     <h2 v-if="publicQuotes">Popular Quotes</h2>
     <div class="col col-3">
       <SearchQuote :user="false" />
+      <p class="getAll" @click="getQuotes">get all quotes</p>
     </div>
-
+    <AppSpinner v-if="!publicQuotes" />
     <!-- <div v-if="publicQuotes.length === 0">Sorry, no Quotes matched</div> -->
     <!-- <div>Sorry, no results matched your search.</div> -->
 
@@ -53,6 +53,14 @@ export default {
     publicQuotes() {
       // return this.$store.state.publicQuotes;
       return this.$store.getters["quotes/getQuotes"];
+    }
+  },
+  methods: {
+    getQuotes() {
+      this.$store.dispatch("quotes/fetchPublicQuotes", {
+        page: 1,
+        limit: 5
+      });
     }
   },
   created() {
@@ -141,5 +149,14 @@ export default {
 
 .testimonial-quote .quote-container {
   padding-left: 100px;
+}
+
+.getAll {
+  font-size: 1.1rem;
+  font-weight: 400;
+  color: #5e5e5e;
+  cursor: pointer;
+  margin-top: 5px;
+  margin-left: 3px;
 }
 </style>

@@ -14,15 +14,17 @@ router.get('/',async (req, res) => {
     try {
         
         // const Quot = await Quote.find({ statu: "public"}).sort({date: -1});
-        const countQuotes = await Quote.countDocuments()
-        console.log(req.query)
-        console.log(countQuotes)
-        const features = new APIFeatures(Quote.find(), req.query)
+        // const countQuotes = await Quote.find({ statu: "public"}).countDocuments()
+        const counter = new APIFeatures(Quote.find({ statu: "public"}), req.query).search()
+        const countQuotes = await counter.query.countDocuments()
+        
+
+        const features = new APIFeatures(Quote.find({ statu: "public"}), req.query)
         .sort()
         .search()
         .paginate();
+        
       const quotes = await features.query;
-            
         res.json({quotes, countQuotes});
       } catch (err) {
         console.error(err.message);

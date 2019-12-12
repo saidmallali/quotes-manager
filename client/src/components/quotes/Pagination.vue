@@ -41,21 +41,37 @@ export default {
   },
   computed: {
     quotes() {
-      return this.$store.getters["quotes/getcountPublicQuotes"];
+      if (this.user) {
+        return this.$store.getters["quotes/getcountUserQuotes"];
+      } else {
+        return this.$store.getters["quotes/getcountPublicQuotes"];
+      }
     }
   },
   methods: {
     getQuotes() {
       //fetch data from server
-      this.$store
-        .dispatch("quotes/fetchPublicQuotes", {
-          page: this.page,
-          limit: this.perPage
-        })
-        .then(() => {
-          this.$emit("ready");
-        })
-        .catch(err => console.error(err.message));
+      !this.user &&
+        this.$store
+          .dispatch("quotes/fetchPublicQuotes", {
+            page: this.page,
+            limit: this.perPage
+          })
+          .then(() => {
+            this.$emit("ready");
+          })
+          .catch(err => console.error(err.message));
+
+      this.user &&
+        this.$store
+          .dispatch("quotes/fetchUserQuotes", {
+            page: this.page,
+            limit: this.perPage
+          })
+          .then(() => {
+            this.$emit("ready");
+          })
+          .catch(err => console.error(err.message));
     },
 
     setPages() {
@@ -72,6 +88,7 @@ export default {
   },
   watch: {
     quotes() {
+      this.pages = [];
       this.setPages();
     },
     page() {

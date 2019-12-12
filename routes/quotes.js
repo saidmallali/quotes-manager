@@ -17,12 +17,15 @@ const Quote = require('../models/QuoteModel')
 router.get('/',checkAuth,async (req, res) => {
     try {
         // const quotes = await Quote.find({ user: req.user.id }).sort({date: -1});
+        const counter = new APIFeatures(Quote.find({ user: req.user.id }), req.query).search()
+        const countQuotes = await counter.query.countDocuments()
+
         const features = new APIFeatures(Quote.find({ user: req.user.id }), req.query)
         .sort()
         .search()
         .paginate();
          const quotes = await features.query;
-        res.json(quotes);
+        res.json({quotes, countQuotes});
       } catch (err) {
         console.error(err.message);
         res.status(500).send('Server Error');

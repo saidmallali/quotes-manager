@@ -15,7 +15,7 @@ export default {
         },
         userQuotes: null,
         countPublicQuotes:null,
-        countUserQuotes:null
+        contUserQuotes:null
     },
 
     mutations:{
@@ -27,7 +27,8 @@ export default {
             state.userQuotes.unshift(quotes)
           },
         setuserQuotes(state, uQuotes){
-            state.userQuotes = uQuotes
+            state.userQuotes = uQuotes.quotes
+            state.contUserQuotes = uQuotes.countQuotes
         },
         clearIsUpdate(state){
             state.isUpdate = false;
@@ -85,7 +86,7 @@ export default {
             .catch(err => console.error(err))
         },
 
-        fetchUserQuotes({commit}) {
+        fetchUserQuotes({commit}, {page, limit}) {
             if(!auth.state.token) return
             const config = {
                 headers:{
@@ -94,7 +95,7 @@ export default {
                 useCredentails: true
               };
             axios
-            .get('/api/quotes', config)
+            .get(`/api/quotes?page=${page}&limit=${limit}`, config)
             .then(res => {
                commit('setuserQuotes', res.data)})
             .catch(err => console.error(err.message))
@@ -186,6 +187,9 @@ export default {
         },
         getcountPublicQuotes(state){
             return state.countPublicQuotes
+        },
+        getcountUserQuotes(state){
+            return state.contUserQuotes
         }
         
 
