@@ -42,14 +42,15 @@ export default {
       this.$v.text.$touch();
       if (!this.$v.text.$invalid) {
         if (this.user) {
-          this.$store
-            .dispatch("quotes/searchQuoteUser", this.text)
-            .then(() => (this.text = ""));
+          this.$store.dispatch("quotes/searchQuoteUser", this.text).then(() => {
+            this.$emit("ready");
+            this.text = "";
+          });
         } else {
-          console.log(this.text);
-          this.$store
-            .dispatch("quotes/searchQuote", this.text)
-            .then(() => (this.text = ""));
+          this.$store.dispatch("quotes/searchQuote", this.text).then(() => {
+            this.$emit("ready");
+            this.text = "";
+          });
         }
       }
     }

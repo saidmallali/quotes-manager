@@ -61,18 +61,16 @@ export default {
 
     actions:{
 
-        fetchPublicQuotes({commit}){
+        fetchPublicQuotes({commit}, {page, limit}){
             axios
-            .get("/api/pbquotes")
+            .get(`/api/pbquotes?page=${page}&limit=${limit}`)
             .then(res => {
-                console.log(res.data)
                 commit('publicQuotes', res.data)
             })
             .catch(err => console.log(err));
              },
 
         createQuote({commit}, quote){
-            console.log('create quote')
             if(!auth.state.token) return
             const config = {
                 headers:{
@@ -82,7 +80,6 @@ export default {
               };
             axios.post('/api/quotes',quote, config)
             .then(res => {
-                console.log(res.data)
                 commit('updateUserQuote', res.data)
                 commit('clearIsUpdate')})
             .catch(err => console.error(err))
@@ -132,7 +129,6 @@ export default {
         },
 
         updateQuote({commit}, quote){
-            console.log(quote)
             if(!auth.state.token) return
             const config = {
                 headers:{
@@ -146,18 +142,15 @@ export default {
         },
 
         searchQuote({commit},quote){
-            console.log('from state',quote)
             axios
             .get(`/api/pbquotes?search=${quote}`)
             .then(res => {
-                console.log(res.data)
                 commit('publicQuotes', res.data)
             })
             .catch(err => console.log(err));
         },
 
         searchQuoteUser({commit},quote){
-            console.log(quote)
             if(!auth.state.token) return
             const config = {
                 headers:{

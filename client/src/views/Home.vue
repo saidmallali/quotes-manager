@@ -6,7 +6,7 @@
       <SearchQuote :user="false" />
     </div>
 
-    <div v-if="publicQuotes.length === 0">Sorry, no Quotes matched</div>
+    <!-- <div v-if="publicQuotes.length === 0">Sorry, no Quotes matched</div> -->
     <!-- <div>Sorry, no results matched your search.</div> -->
 
     <div v-if="publicQuotes" class="activity-list push-top">
@@ -56,10 +56,7 @@ export default {
     }
   },
   created() {
-    this.$store
-      .dispatch("quotes/fetchPublicQuotes")
-      .then(() => this.$emit("ready"))
-      .catch(err => console.error(err.message));
+    this.$emit("ready");
   }
 };
 </script>

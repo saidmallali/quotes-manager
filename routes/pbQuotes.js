@@ -15,6 +15,7 @@ router.get('/',async (req, res) => {
         
         // const Quot = await Quote.find({ statu: "public"}).sort({date: -1});
         const countQuotes = await Quote.countDocuments()
+        console.log(req.query)
         console.log(countQuotes)
         const features = new APIFeatures(Quote.find(), req.query)
         .sort()
