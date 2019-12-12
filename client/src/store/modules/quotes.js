@@ -13,12 +13,15 @@ export default {
         editQuote:{
             statu:'public'
         },
-        userQuotes: null
+        userQuotes: null,
+        countPublicQuotes:null,
+        countUserQuotes:null
     },
 
     mutations:{
         publicQuotes(state, quotes){
-            state.publicQuotes = quotes
+            state.publicQuotes = quotes.quotes
+            state.countPublicQuotes = quotes.countQuotes
           },
         updateUserQuote(state, quotes){
             state.userQuotes.unshift(quotes)
@@ -153,8 +156,20 @@ export default {
             .catch(err => console.log(err));
         },
 
-        searchQuoteUser(context,quote){
+        searchQuoteUser({commit},quote){
             console.log(quote)
+            if(!auth.state.token) return
+            const config = {
+                headers:{
+                    'x-auth-token': auth.state.token
+                },
+                useCredentails: true
+              };
+            axios
+            .get(`/api/quotes?search=${quote}`, config)
+            .then(res => {
+               commit('setuserQuotes', res.data)})
+            .catch(err => console.error(err.message))
         }
 
         
@@ -176,6 +191,9 @@ export default {
         getUserQuotes(state){
             return state.userQuotes
         },
+        getcountPublicQuotes(state){
+            return state.countPublicQuotes
+        }
         
 
         

@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const checkAuth = require('../middleware/checkAuth')
-const config = require('config')
+// const config = require('config')
 const {check, validationResult} = require('express-validator')
+const APIFeatures = require('../utils/apiFeatures');
 
 const User = require('../models/UsersModel');
 const Quote = require('../models/QuoteModel')
@@ -15,7 +16,12 @@ const Quote = require('../models/QuoteModel')
 
 router.get('/',checkAuth,async (req, res) => {
     try {
-        const quotes = await Quote.find({ user: req.user.id }).sort({date: -1});
+        // const quotes = await Quote.find({ user: req.user.id }).sort({date: -1});
+        const features = new APIFeatures(Quote.find({ user: req.user.id }), req.query)
+        .sort()
+        .search()
+        .paginate();
+         const quotes = await features.query;
         res.json(quotes);
       } catch (err) {
         console.error(err.message);

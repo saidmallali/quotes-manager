@@ -39,6 +39,7 @@ export default {
 
   methods: {
     search() {
+      this.$v.text.$touch();
       if (!this.$v.text.$invalid) {
         if (this.user) {
           this.$store
@@ -58,7 +59,8 @@ export default {
 <style lang="scss">
 /*Resize the wrap to see the search bar change!*/
 #search {
-  width: 30%;
+  min-width: 30%;
+  max-width: 60%;
 
   .searchBar {
     width: 100%;

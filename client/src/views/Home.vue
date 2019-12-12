@@ -26,6 +26,7 @@
         </div>
       </div>
     </div>
+    <Pagination :user="false" />
   </div>
 </template>
 
@@ -34,11 +35,13 @@
 // import axios from "axios";
 import AppSpinner from "@/components/layout/AppSpinner";
 import SearchQuote from "@/components/quotes/SearchQuote";
+import Pagination from "@/components/quotes/Pagination";
 export default {
   name: "home",
   components: {
     AppSpinner,
-    SearchQuote
+    SearchQuote,
+    Pagination
   },
   data() {
     return {

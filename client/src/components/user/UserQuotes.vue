@@ -9,6 +9,9 @@
       <QuoteEditor />
       <hr />
       <div class="activity-list">
+        <div class="col col-7 push-down userSearch">
+          <SearchQuote :user="true" />
+        </div>
         <UserQuotesItems :userQuotes="userQuotes" />
       </div>
     </div>
@@ -17,12 +20,14 @@
 <script>
 import UserQuotesItems from "./UserQuotesItems";
 import QuoteEditor from "@/components/quotes/QuoteEditor";
+import SearchQuote from "@/components/quotes/SearchQuote";
 
 export default {
   name: "UserQuotes",
   components: {
     UserQuotesItems,
-    QuoteEditor
+    QuoteEditor,
+    SearchQuote
   },
   props: {
     user: {
@@ -36,3 +41,5 @@ export default {
   }
 };
 </script>
+<style lang="scss">
+</style>

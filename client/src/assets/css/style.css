@@ -1027,10 +1027,6 @@ button {
   min-height: 100vh;
 }
 
-span.privat {
-  color: red;
-}
-
-span.public {
-  color: green;
+.push-down {
+  margin-bottom: 1.5rem;
 }
